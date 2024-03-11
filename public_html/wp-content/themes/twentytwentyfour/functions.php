@@ -206,47 +206,67 @@ endif;
 add_action( 'init', 'twentytwentyfour_pattern_categories' );
 
 
-if ( ! function_exists( 'testing_publish_post' ) ) :
-	function testing_publish_post() {
+// if ( ! function_exists( 'testing_publish_post' ) ) :
+// 	function testing_publish_post() {
+//
+// 		if ( get_option( 'post_is_published_01' ) != 'yes' ) {
+// 			$postType = 'post';
+// 			$userID = 1;
+// 			$categoryID = '1';
+// 			$postStatus = 'publish';
+// 			$leadTitle = 'Vagrant versus Docker '.date("n/d/Y");
+// 			$leadContent = <<<EOD
+// 				<h1>Programatically posted</h1>
+// 				<p>This post was published programatically and meta option saved as <b>post_is_published_01</b>.
+// 				A PHP script in the functions.php file of the child theme.</p>
+// 			EOD;
+// 			$leadContent .= ' <!--more--><p>Expensive they are, but they are totally worth it.</p>';
+//
+// 			# build time&date
+// 			$timeStamp = $minuteCounter = 0;
+// 			$iCounter = 1;
+// 			$minuteIncrement = 1;
+// 			$adjustClockMinutes = 0;
+// 			$minuteCounter = $iCounter * $minuteIncrement;
+// 			$minuteCounter = $minuteCounter + $adjustClockMinutes;
+// 			$timeStamp = date('Y-m-d H:i:s', strtotime("+$minuteCounter min"));
+//
+// 			# build post
+// 			$new_post = array(
+// 				'post_title' => $leadTitle,
+// 				'post_content' => $leadContent,
+// 				'post_status' => $postStatus,
+// 				'post_date' => $timeStamp,
+// 				'post_author' => $userID,
+// 				'post_type' => $postType,
+// 				'post_category' => array($categoryID)
+// 			);
+// 			# publish it !
+// 			$post_id = wp_insert_post($new_post);
+//
+// 			update_option( 'post_is_published_01', 'yes' );
+// 		}
+// 	}
+// endif;
 
-		if ( get_option( 'post_is_published_01' ) != 'yes' ) {
-			$postType = 'post';
-			$userID = 1;
-			$categoryID = '1';
-			$postStatus = 'publish';
-			$leadTitle = 'Vagrant versus Docker '.date("n/d/Y");
-			$leadContent = <<<EOD
-				<h1>Programatically posted</h1>
-				<p>This post was published programatically and meta option saved as <b>post_is_published_01</b>.
-				A PHP script in the functions.php file of the child theme.</p>
-			EOD;
-			$leadContent .= ' <!--more--><p>Expensive they are, but they are totally worth it.</p>';
+// add_action( 'init', 'testing_publish_post' );
 
-			# build time&date
-			$timeStamp = $minuteCounter = 0;
-			$iCounter = 1;
-			$minuteIncrement = 1;
-			$adjustClockMinutes = 0;
-			$minuteCounter = $iCounter * $minuteIncrement;
-			$minuteCounter = $minuteCounter + $adjustClockMinutes;
-			$timeStamp = date('Y-m-d H:i:s', strtotime("+$minuteCounter min"));
-
-			# build post
-			$new_post = array(
-				'post_title' => $leadTitle,
-				'post_content' => $leadContent,
-				'post_status' => $postStatus,
-				'post_date' => $timeStamp,
-				'post_author' => $userID,
-				'post_type' => $postType,
-				'post_category' => array($categoryID)
-			);
-			# publish it !
-			$post_id = wp_insert_post($new_post);
-
-			update_option( 'post_is_published_01', 'yes' );
-		}
+if ( ! function_exists( 'testing_publish_page ' ) ) :
+	$check_page_exist = get_page_by_title('Page published programatically', 'OBJECT', 'page');
+	if(empty($check_page_exist)) {
+		$page_id = wp_insert_post(
+			array(
+				'comment_status' => 'close',
+				'ping_status' => 'close',
+				'post_author' => 1,
+				'post_title' => ucwords('Page published programatically'),
+				'post_name' => strtolower(str_replace(' ', '-', trim('Page published programatically'))),
+				'post_status' => 'publish',
+				'post_content' => '<p>This is the content of the page, html tags are allowed here</p>',
+				'post_type' => 'page'
+			)
+		);
 	}
 endif;
 
-add_action( 'init', 'testing_publish_post' );
+// add_action( 'init', 'testing_publish_page' );
