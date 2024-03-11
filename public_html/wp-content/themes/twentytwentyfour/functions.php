@@ -251,22 +251,62 @@ add_action( 'init', 'twentytwentyfour_pattern_categories' );
 
 // add_action( 'init', 'testing_publish_post' );
 
-if ( ! function_exists( 'testing_publish_page ' ) ) :
-	$check_page_exist = get_page_by_title('Page published programatically', 'OBJECT', 'page');
+if ( ! function_exists( 'assignment_7_post ' ) ) :
+	$check_page_exist = get_page_by_title('Vagrant versus Docker', 'OBJECT', 'page');
 	if(empty($check_page_exist)) {
 		$page_id = wp_insert_post(
 			array(
 				'comment_status' => 'close',
 				'ping_status' => 'close',
 				'post_author' => 1,
-				'post_title' => ucwords('Page published programatically'),
-				'post_name' => strtolower(str_replace(' ', '-', trim('Page published programatically'))),
+				'post_title' => ucwords('Vagrant versus Docker'),
+				'post_name' => strtolower(str_replace(' ', '-', trim('Vagrant versus Docker'))),
 				'post_status' => 'publish',
-				'post_content' => '<p>This is the content of the page, html tags are allowed here</p>',
+				'post_content' => <<<EOD
+					<p><b>ABE</b>, Paul Vince A. | pabe2@jhu.edu</p>
+					<p>EN.605.609.81.SP24 - DevOps and Secure Software Development</p>
+					<p>
+						This course allowed me to have an in-depth, hands-on experience with both technologies.
+						Through the lecture this week, I learned that Vagrant touts itself as a <i>virtualization
+						automation tool</i>. Docker, on the other hand, touts itself as an <i>OS-level virtualization
+						tool</i>.
+					</p>
+						Having to choose between the two, I personally prefer Docker in its current state of maturity
+						over Vagrant. Despite that, I do see Vagrant to propel beyond Docker’s capabilities in the far
+						future. The assignment made me realize implicitly that Vagrant takes Virtual Machine (VM)
+						provisioning towards the realm of <i>containerization</i> (a.k.a., allowing a VM’s configuration
+						to be defined as Code and be highly and effectively <b>portable</b> and <b>collaborated</b> on).
+						This reason alone is enough to justify why Vagrant, in its marketed capabilities, are more
+						advanced than Docker for modernizing virtualization techniques, as it supports <b>BOTH</b>
+						virtual machines and containers.
+					<p>
+					</p>
+
+					<p>
+						I, though, have yet to dive deeper about the scope of access that a Vagrant box has to the host
+						OS (i.e., whether a box is treated to have VM privileges with the host OS, even if it has Docker
+						as its provider). As a matter of fact, Docker provides a layer of isolation on influencing
+						control over a host OS during its virtualization. This exact value proposition is what I truly
+						love about Docker for when compared to other virtualization techniques: allowing a functioning
+						host to run with the least possible footprint and access to its host. This, in my opinion, is
+						the most effective way to run distributed and portable software systems <i>safely</i>.
+					</p>
+
+					<p>
+						In an event that an enterprise or a project do still see the need to have a hybrid approach to
+						their mini-services architecture for distributed systems, Vagrant will be my recommendation over
+						Docker. With Docker as its provider, it goes to show the potential of Vagrant within the software
+						engineering field as it provides support in both virtual machine and container virtualization
+						capabilities in one platform. Till that point where the Vagrant community will be as mature as
+						the Docker community is to date, my opinion will change definitely to prefer Vagrant over
+						Docker. It has been so cumbersome for me to install vagrant within my Apple Silicon M1 MacBook
+						Pro. With Docker, I have no issues at all in hosting AMD64 images. Being said that, knowing how
+						Hashicorp can create revolutionary products (i.e., Terraform, Vault), I will not be surprised if
+						they expand Vagrant to have its own OS-level virtualization capability as well.
+					</p>
+				EOD,
 				'post_type' => 'page'
 			)
 		);
 	}
 endif;
-
-// add_action( 'init', 'testing_publish_page' );
